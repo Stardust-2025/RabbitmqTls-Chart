@@ -1109,7 +1109,7 @@ service:
   ports:
     amqp: 5672
     amqpTls: 5671
-    dist: 25672
+    dist: 25673
     manager: 15672
     managerTls: 15671
     metrics: 9419
