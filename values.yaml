@@ -533,7 +533,6 @@ configuration: |-
   tcp_listen_options.keepalive = {{ .Values.tcpListenOptions.keepalive }}
   {{- end }}
   stream.listeners.ssl.1 = 30551
-  stream.advertised_host = a5143cece9e8f44b9a3eaf024a286174-1991647863.il-central-1.elb.amazonaws.com
   stream.advertised_port = 30551
 
 ## @param configurationExistingSecret Existing secret with the configuration to use as rabbitmq.conf.
