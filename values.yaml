@@ -467,7 +467,20 @@ configuration: |-
   auth_oauth2.resource_server_id = rabbitmq
   auth_oauth2.additional_scopes_key = cognito:groups
 
-
+  auth_oauth2.scope_aliases.1.alias = admin/stream_admin
+  auth_oauth2.scope_aliases.1.scope = rabbitmq.read:*/* rabbitmq.write:*/* rabbitmq.configure:*/*
+  
+  auth_oauth2.scope_aliases.2.alias = write/write_accsess
+  auth_oauth2.scope_aliases.2.scope = rabbitmq.write:*/*
+  
+  auth_oauth2.scope_aliases.3.alias = read/read_accsess
+  auth_oauth2.scope_aliases.3.scope = rabbitmq.read:*/*
+  
+  auth_oauth2.scope_aliases.4.alias = config/config_accsess
+  auth_oauth2.scope_aliases.4.scope = rabbitmq.configure:*/*
+  
+  auth_oauth2.scope_aliases.5.alias = producer/producer_accsess
+  auth_oauth2.scope_aliases.5.scope = rabbitmq.read:*/* rabbitmq.write:*/* rabbitmq.configure:*/*
 
   auth_oauth2.verify_aud = false
   auth_oauth2.preferred_username_claims.1 = username
