@@ -390,6 +390,8 @@ extraContainerPorts:
      containerPort: 30551
    - name: amqp-tls
      containerPort: 5671
+   - name: managerTls
+     containerPort: 15671
 ## @param configuration [string] RabbitMQ Configuration file content: required cluster configuration
 ## Do not override unless you know what you are doing.
 ## To add more configuration, use `extraConfiguration` of `advancedConfiguration` instead
@@ -458,13 +460,6 @@ configuration: |-
   {{- else }}
   loopback_users.guest = {{ .Values.auth.enableLoopbackUser }}
   {{- end }}
-
-  ## Management UI OAuth2 Login
-  management.oauth_enabled = true
-  management.oauth_client_id = ${client_id_ui}
-  management.oauth_disable_basic_auth = true
-  management.listener.port = 15671
-  management.listener.ssl = true
 
   ## TLS Settings
   ssl_options.certfile = /opt/bitnami/rabbitmq/certs/cert.pem
@@ -551,6 +546,13 @@ extraConfiguration: |-
   
   auth_oauth2.scope_aliases.5.alias = producer/producer_accsess
   auth_oauth2.scope_aliases.5.scope = rabbitmq.read:*/* rabbitmq.write:*/* rabbitmq.configure:*/*
+
+  ## Management UI OAuth2 Login
+  management.oauth_enabled = true
+  management.oauth_client_id = ${client_id_ui}
+  management.oauth_disable_basic_auth = true
+  management.listener.port = 15671
+  management.listener.ssl = true
   
 ## @param extraConfigurationExistingSecret Existing secret with the extra configuration to append to `configuration`.
 ## Must contain the key "extraConfiguration"
