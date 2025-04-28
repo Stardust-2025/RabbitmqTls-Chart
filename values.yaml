@@ -273,7 +273,7 @@ communityPlugins: ""
 ## @param extraPlugins Extra plugins to enable (single string containing a space-separated list)
 ## Use this instead of `plugins` to add new plugins
 ##
-extraPlugins: "rabbitmq_auth_backend_ldap"
+extraPlugins: "rabbitmq_auth_backend_oauth2"
 ## Clustering settings
 ##
 clustering:
@@ -333,7 +333,13 @@ terminationGracePeriodSeconds: 120
 ##   - name: FOO
 ##     value: BAR
 ##
-extraEnvVars: []
+extraEnvVars:
+  - name: jwks_url
+    value: "https://cognito-idp.il-central-1.amazonaws.com/${aws_cognito_user_pool.rabbitmq_pool.id}/.well-known/jwks.json"
+  - name: issuer
+    value: "https://cognito-idp.il-central-1.amazonaws.com/${aws_cognito_user_pool.rabbitmq_pool.id}"
+  - name: client_id_ui
+    value: "aws_cognito_user_pool_client.rabbitmq_client_ui.id"
 ## @param extraEnvVarsCM Name of existing ConfigMap containing extra environment variables
 ##
 extraEnvVarsCM: ""
@@ -420,9 +426,9 @@ configuration: |-
   {{- if and (not .Values.auth.securePassword) .Values.auth.password }}
   default_pass = {{ .Values.auth.password }}
   {{- end }}
+
   {{- if .Values.clustering.enabled }}
   ## Clustering
-  ##
   cluster_name = {{ default (include "common.names.fullname" .) .Values.clustering.name }}
   cluster_formation.peer_discovery_backend  = rabbit_peer_discovery_k8s
   cluster_formation.k8s.host = kubernetes.default
@@ -434,86 +440,82 @@ configuration: |-
   cluster_formation.node_cleanup.only_log_warning = true
   cluster_partition_handling = {{ .Values.clustering.partitionHandling }}
   {{- end }}
+
   {{ if and .Values.clustering.enabled .Values.loadDefinition.enabled }}
   cluster_formation.target_cluster_size_hint = {{ .Values.replicaCount }}
   {{ end }}
+
   {{- if .Values.loadDefinition.enabled }}
   load_definitions = {{ .Values.loadDefinition.file }}
   {{- end }}
-  # queue master locator
+
+  ## Queue master locator
   queue_master_locator = {{ .Values.queue_master_locator }}
-  # enable loopback user
+
+  ## Loopback user
   {{- if not (empty .Values.auth.username) }}
   loopback_users.{{ .Values.auth.username }} = {{ .Values.auth.enableLoopbackUser }}
-  {{- else}}
+  {{- else }}
   loopback_users.guest = {{ .Values.auth.enableLoopbackUser }}
   {{- end }}
-  {{ template "rabbitmq.extraConfiguration" . }}
-  {{- if .Values.auth.tls.enabled }}
-  ssl_options.verify = {{ .Values.auth.tls.sslOptionsVerify }}
-  listeners.ssl.default = {{ .Values.service.ports.amqpTls }}
-  ssl_options.fail_if_no_peer_cert = {{ .Values.auth.tls.failIfNoPeerCert }}
-  ssl_options.cacertfile = /opt/bitnami/rabbitmq/certs/ca_certificate.pem
-  ssl_options.certfile = /opt/bitnami/rabbitmq/certs/server_certificate.pem
-  ssl_options.keyfile = /opt/bitnami/rabbitmq/certs/server_key.pem
-  {{- if .Values.auth.tls.sslOptionsPassword.enabled }}
-  ssl_options.password = {{ include "common.secrets.passwords.manage" (dict "secret" .Values.auth.tls.sslOptionsPassword.existingSecret "key" .Values.auth.tls.sslOptionsPassword.key "providedValues" (list "auth.tls.sslOptionsPassword.password") "skipB64enc" true "failOnNew" false "context" $) }}
-  {{- end }}
-  {{- end }}
-  {{- if .Values.ldap.enabled }}
-  auth_backends.1.authn = ldap
-  auth_backends.1.authz = {{ ternary "ldap" "internal" .Values.ldap.authorisationEnabled }}
-  auth_backends.2 = internal
-  {{- $host :=  list }}
-  {{- $port :=  ternary 636 389 .Values.ldap.tls.enabled }}
-  {{- if .Values.ldap.uri }}
-  {{- $hostPort := get (urlParse .Values.ldap.uri) "host" }}
-  {{- $host = list (index (splitList ":" $hostPort) 0) -}}
-  {{- if (contains ":" $hostPort) }}
-  {{- $port = index (splitList ":" $hostPort) 1 -}}
-  {{- end }}
-  {{- end }}
-  {{- range $index, $server := concat $host .Values.ldap.servers }}
-  auth_ldap.servers.{{ add $index 1 }} = {{ $server }}
-  {{- end }}
-  auth_ldap.port = {{ coalesce .Values.ldap.port $port }}
-  {{- if or .Values.ldap.user_dn_pattern .Values.ldap.userDnPattern }}
-  auth_ldap.user_dn_pattern = {{ coalesce .Values.ldap.user_dn_pattern .Values.ldap.userDnPattern }}
-  {{- end }}
-  {{- if .Values.ldap.basedn }}
-  auth_ldap.dn_lookup_base = {{ .Values.ldap.basedn }}
-  {{- end }}
-  {{- if .Values.ldap.uidField }}
-  auth_ldap.dn_lookup_attribute = {{ .Values.ldap.uidField }}
-  {{- end }}
-  {{- if .Values.ldap.binddn }}
-  auth_ldap.dn_lookup_bind.user_dn = {{ .Values.ldap.binddn }}
-  auth_ldap.dn_lookup_bind.password = {{ required "'ldap.bindpw' is required when 'ldap.binddn' is defined" .Values.ldap.bindpw }}
-  {{- end }}
-  {{- if .Values.ldap.tls.enabled }}
-  auth_ldap.use_ssl = {{ not .Values.ldap.tls.startTls }}
-  auth_ldap.use_starttls = {{ .Values.ldap.tls.startTls }}
-  {{- if .Values.ldap.tls.CAFilename }}
-  auth_ldap.ssl_options.cacertfile = {{ .Values.ldap.tls.certificatesMountPath }}/{{ .Values.ldap.tls.CAFilename }}
-  {{- end }}
-  {{- if .Values.ldap.tls.certFilename }}
-  auth_ldap.ssl_options.certfile = {{ .Values.ldap.tls.certificatesMountPath }}/{{ .Values.ldap.tls.certFilename }}
-  auth_ldap.ssl_options.keyfile = {{ .Values.ldap.tls.certificatesMountPath }}/{{ required "'ldap.tls.certKeyFilename' is required when 'ldap.tls.certFilename' is defined" .Values.ldap.tls.certKeyFilename }}
-  {{- end }}
-  {{- if .Values.ldap.tls.skipVerify }}
-  auth_ldap.ssl_options.verify = verify_none
-  auth_ldap.ssl_options.fail_if_no_peer_cert = false
-  {{- else if .Values.ldap.tls.verify }}
-  auth_ldap.ssl_options.verify = {{ .Values.ldap.tls.verify }}
-  {{- end }}
-  {{- end }}
-  {{- end }}
+
+  ## OAuth2 Authentication Backend (AWS Cognito)
+  auth_backends.1 = rabbit_auth_backend_oauth2
+
+  auth_oauth2.jwks_url = ${jwks_url}
+  auth_oauth2.issuer = ${issuer}
+  auth_oauth2.resource_server_id = rabbitmq
+  auth_oauth2.additional_scopes_key = cognito:groups
+
+  auth_oauth2.scope_aliases.1.alias = admin/stream_admin
+  auth_oauth2.scope_aliases.1.scope = rabbitmq.read:*/* rabbitmq.write:*/* rabbitmq.configure:*/*
+
+  auth_oauth2.scope_aliases.2.alias = write/write_access
+  auth_oauth2.scope_aliases.2.scope = rabbitmq.write:*/*
+
+  auth_oauth2.scope_aliases.3.alias = read/read_access
+  auth_oauth2.scope_aliases.3.scope = rabbitmq.read:*/*
+
+  auth_oauth2.scope_aliases.4.alias = config/config_access
+  auth_oauth2.scope_aliases.4.scope = rabbitmq.configure:*/*
+
+  auth_oauth2.scope_aliases.5.alias = producer/producer_access
+  auth_oauth2.scope_aliases.5.scope = rabbitmq.read:*/* rabbitmq.write:*/* rabbitmq.configure:*/*
+
+  auth_oauth2.verify_aud = false
+  auth_oauth2.preferred_username_claims.1 = username
+
+  ## Management UI OAuth2 Login
+  management.oauth_enabled = true
+  management.oauth_client_id = ${client_id_ui}
+  management.oauth_disable_basic_auth = true
+  management.listener.port = 15671
+  management.listener.ssl = true
+
+  ## TLS Settings
+  ssl_options.certfile = /opt/bitnami/rabbitmq/certs/cert.pem
+  ssl_options.keyfile = /opt/bitnami/rabbitmq/certs/key.pem
+  ssl_options.cacertfile = /opt/bitnami/rabbitmq/certs/cacert.pem
+  ssl_options.verify = verify_none
+  ssl_options.fail_if_no_peer_cert = false
+  ssl_options.client_renegotiation = false
+  ssl_options.secure_renegotiate = true
+  ssl_options.honor_ecc_order = true
+  ssl_options.honor_cipher_order = true
+
+  listeners.ssl.default = 5671
+  listeners.tcp = none
+
+  stream.listeners.ssl.1 = 30551
+  stream.listeners.tcp = none
+  stream.advertised_host = 10.10.10.24
+  stream.advertised_port = 30551
+
   ## Prometheus metrics
-  ##
   prometheus.tcp.port = {{ .Values.containerPorts.metrics }}
+
   {{- if .Values.memoryHighWatermark.enabled }}
   ## Memory Threshold
-  ##
   {{- if (dig "limits" "memory" "" .Values.resources) }}
   total_memory_available_override_value = {{ include "rabbitmq.toBytes" (dig "limits" "memory" "" .Values.resources) }}
   {{- end }}
@@ -523,18 +525,20 @@ configuration: |-
   vm_memory_high_watermark.{{ .Values.memoryHighWatermark.type }} = {{ .Values.memoryHighWatermark.value }}
   {{- end }}
   {{- end }}
+
   {{- if .Values.tcpListenOptions.enabled }}
   ## TCP Listen Options
-  ##
   tcp_listen_options.backlog = {{ .Values.tcpListenOptions.backlog }}
   tcp_listen_options.nodelay = {{ .Values.tcpListenOptions.nodelay }}
-  tcp_listen_options.linger.on      = {{ .Values.tcpListenOptions.linger.lingerOn }}
+  tcp_listen_options.linger.on = {{ .Values.tcpListenOptions.linger.lingerOn }}
   tcp_listen_options.linger.timeout = {{ .Values.tcpListenOptions.linger.timeout }}
   tcp_listen_options.keepalive = {{ .Values.tcpListenOptions.keepalive }}
   {{- end }}
-  stream.listeners.ssl.1 = 30551
-  stream.advertised_host = 10.10.10.24
-  stream.advertised_port = 30551
+
+  ## Console Logging
+  log.console = true
+  log.console.level = info
+
 
 ## @param configurationExistingSecret Existing secret with the configuration to use as rabbitmq.conf.
 ## Must contain the key "rabbitmq.conf"
@@ -551,57 +555,7 @@ extraConfiguration: |-
   disk_free_limit.absolute = 50MB
   vm_memory_high_watermark.absolute = 512MB
   consumer_timeout = 3600000
-
-  auth_backends.1 = rabbit_auth_backend_oauth2
   
-  auth_oauth2.jwks_url = "https://cognito-idp.il-central-1.amazonaws.com/${aws_cognito_user_pool.rabbitmq_pool.id}/.well-known/jwks.json"
-  auth_oauth2.issuer = "https://cognito-idp.il-central-1.amazonaws.com/${aws_cognito_user_pool.rabbitmq_pool.id}"
-  auth_oauth2.resource_server_id = rabbitmq
-  auth_oauth2.additional_scopes_key = cognito:groups
-  
-  auth_oauth2.scope_aliases.1.alias = admin/stream_admin
-  auth_oauth2.scope_aliases.1.scope = rabbitmq.read:*/* rabbitmq.write:*/* rabbitmq.configure:*/*
-  
-  auth_oauth2.scope_aliases.2.alias = write/write_accsess
-  auth_oauth2.scope_aliases.2.scope = rabbitmq.write:*/*
-  
-  auth_oauth2.scope_aliases.3.alias = read/read_accsess
-  auth_oauth2.scope_aliases.3.scope = rabbitmq.read:*/*
-  
-  auth_oauth2.scope_aliases.4.alias = config/config_accsess
-  auth_oauth2.scope_aliases.4.scope = rabbitmq.configure:*/*
-  
-  auth_oauth2.scope_aliases.5.alias = producer/producer_accsess
-  auth_oauth2.scope_aliases.5.scope = rabbitmq.read:*/* rabbitmq.write:*/* rabbitmq.configure:*/*
-  
-  auth_oauth2.verify_aud = false
-  auth_oauth2.preferred_username_claims.1 = username
-  management.oauth_enabled = true
-  management.oauth_client_id = aws_cognito_user_pool_client.rabbitmq_client_ui.id
-  management.oauth_disable_basic_auth = true
-  management.listener.ssl = true
-  management.ssl.port = 15671
-  management.ssl.cacertfile = /opt/bitnami/rabbitmq/certs/cacert.pem
-  management.ssl.certfile = /opt/bitnami/rabbitmq/certs/cert.pem
-  management.ssl.keyfile = /opt/bitnami/rabbitmq/certs/key.pem
-  
-  
-  listeners.tcp = none
-  listeners.ssl.default = 5671
-  ssl_options.cacertfile = /opt/bitnami/rabbitmq/certs/cacert.pem
-  ssl_options.certfile = /opt/bitnami/rabbitmq/certs/cert.pem
-  ssl_options.keyfile = /opt/bitnami/rabbitmq/certs/key.pem
-  ssl_options.verify = verify_none
-  ssl_options.fail_if_no_peer_cert = false
-  ssl_options.client_renegotiation = false
-  ssl_options.secure_renegotiate = true
-  ssl_options.honor_ecc_order = true
-  ssl_options.honor_cipher_order = true
-    
-  
-  listeners.ssl.stream = 30551
-  stream.listeners.tcp   = none
-
 ## @param extraConfigurationExistingSecret Existing secret with the extra configuration to append to `configuration`.
 ## Must contain the key "extraConfiguration"
 ## Takes precedence over `extraConfiguration`, so do not use both simultaneously
