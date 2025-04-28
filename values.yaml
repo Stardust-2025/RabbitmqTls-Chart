@@ -527,7 +527,7 @@ configurationExistingSecret: ""
 extraConfiguration: |-
   #default_vhost = {{ .Release.Namespace }}-vhost
   disk_free_limit.absolute = 50MB
-  vm_memory_high_watermark.absolute = 512MB
+  vm_memory_high_watermark.absolute = 712MB
   consumer_timeout = 3600000
   auth_backends.1 = rabbit_auth_backend_oauth2
   auth_backends.2 = internal
