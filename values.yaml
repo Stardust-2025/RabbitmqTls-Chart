@@ -359,6 +359,7 @@ containerPorts:
   amqpTls: 5671
   dist: 25672
   manager: 15672
+  managerTls: 15671
   epmd: 4369
   metrics: 9419
   stream: 30551
@@ -390,8 +391,6 @@ extraContainerPorts:
      containerPort: 30551
    - name: amqp-tls
      containerPort: 5671
-   - name: managerTls
-     containerPort: 15671
 ## @param configuration [string] RabbitMQ Configuration file content: required cluster configuration
 ## Do not override unless you know what you are doing.
 ## To add more configuration, use `extraConfiguration` of `advancedConfiguration` instead
