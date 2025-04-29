@@ -545,7 +545,7 @@ extraConfiguration: |-
   auth_oauth2.scope_aliases.1.alias = admin/stream_admin
   auth_oauth2.scope_aliases.1.scope = rabbitmq.read:*/* rabbitmq.write:*/* rabbitmq.configure:*/*
   
-  auth_oauth2.scope_aliases.2.alias = producer/producer_accesss
+  auth_oauth2.scope_aliases.2.alias = producer/producer_access
   auth_oauth2.scope_aliases.2.scope = rabbitmq.write:*/*
   
   auth_oauth2.scope_aliases.3.alias = consumer/consumer_access
