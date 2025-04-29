@@ -259,7 +259,7 @@ memoryHighWatermark:
   value: 0.4
 ## @param plugins List of default plugins to enable (should only be altered to remove defaults; for additional plugins use `extraPlugins`)
 ##
-plugins: "rabbitmq_peer_discovery_k8s rabbitmq_stream"
+plugins: "rabbitmq_management rabbitmq_peer_discovery_k8s rabbitmq_stream"
 ## rabbitmq_stream
 
 ## @param queue_master_locator Changes the queue_master_locator setting in the rabbitmq config file
@@ -391,6 +391,8 @@ extraContainerPorts:
      containerPort: 30551
    - name: amqp-tls
      containerPort: 5671
+   - name: manager-tls
+     containerPort: 15671
 ## @param configuration [string] RabbitMQ Configuration file content: required cluster configuration
 ## Do not override unless you know what you are doing.
 ## To add more configuration, use `extraConfiguration` of `advancedConfiguration` instead
