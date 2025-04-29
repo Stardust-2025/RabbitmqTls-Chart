@@ -550,14 +550,7 @@ extraConfiguration: |-
   
   auth_oauth2.scope_aliases.3.alias = consumer/consumer_access
   auth_oauth2.scope_aliases.3.scope = rabbitmq.read:*/*
-  
-  management.oauth_enabled = true
-  management.oauth_client_id = "531b71725rrg67r58lhd0gnrfv"
-  management.oauth_disable_basic_auth = true
-  management.listener.port = 15671
-  management.listener.ssl = true
-
-  
+    
 ## @param extraConfigurationExistingSecret Existing secret with the extra configuration to append to `configuration`.
 ## Must contain the key "extraConfiguration"
 ## Takes precedence over `extraConfiguration`, so do not use both simultaneously
