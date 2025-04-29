@@ -335,11 +335,11 @@ terminationGracePeriodSeconds: 120
 ##
 extraEnvVars:
   - name: jwks_url
-    value: "https://cognito-idp.il-central-1.amazonaws.com/${aws_cognito_user_pool.rabbitmq_pool.id}/.well-known/jwks.json"
+    value: "https://cognito-idp.il-central-1.amazonaws.com/il-central-1_cS8XlMseJ/.well-known/jwks.json"
   - name: issuer
-    value: "https://cognito-idp.il-central-1.amazonaws.com/${aws_cognito_user_pool.rabbitmq_pool.id}"
+    value: "https://cognito-idp.il-central-1.amazonaws.com/il-central-1_cS8XlMseJ"
   - name: client_id_ui
-    value: "aws_cognito_user_pool_client.rabbitmq_client_ui.id"
+    value: "5dac2f8n5sjcpstm9m3mcbqeva"
 ## @param extraEnvVarsCM Name of existing ConfigMap containing extra environment variables
 ##
 extraEnvVarsCM: ""
