@@ -259,7 +259,7 @@ memoryHighWatermark:
   value: 0.4
 ## @param plugins List of default plugins to enable (should only be altered to remove defaults; for additional plugins use `extraPlugins`)
 ##
-plugins: "rabbitmq_management rabbitmq_peer_discovery_k8s rabbitmq_stream"
+plugins: "rabbitmq_peer_discovery_k8s rabbitmq_stream"
 ## rabbitmq_stream
 
 ## @param queue_master_locator Changes the queue_master_locator setting in the rabbitmq config file
