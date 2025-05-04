@@ -538,21 +538,22 @@ extraConfiguration: |-
   auth_backends.1 = rabbit_auth_backend_oauth2
   auth_backends.2 = internal
 
-  auth_oauth2.jwks_url = "https://cognito-idp.il-central-1.amazonaws.com/il-central-1_qfZsfVLI1/.well-known/jwks.json"
-  auth_oauth2.issuer = "https://cognito-idp.il-central-1.amazonaws.com/il-central-1_qfZsfVLI1"
-  auth_oauth2.default_scope_prefix = ""
-  auth_oauth2.resource_server_id = admin
-  auth_oauth2.additional_scopes_key = cognito:groups
-  
-  auth_oauth2.scope_aliases.1.alias = admin/stream_admin
-  auth_oauth2.scope_aliases.1.scope = rabbitmq.read:*/* rabbitmq.write:*/* rabbitmq.configure:*/*
-  
-  auth_oauth2.scope_aliases.2.alias = producer/producer_access
-  auth_oauth2.scope_aliases.2.scope = rabbitmq.write:*/*
-  
-  auth_oauth2.scope_aliases.3.alias = consumer/consumer_access
-  auth_oauth2.scope_aliases.3.scope = rabbitmq.read:*/*
+  auth_oauth2.resource_server_id = 531b71725rrg67r58lhd0gnrfv
+  auth_oauth2.jwks_url = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_qfZsfVLI1/.well-known/jwks.json
+  auth_oauth2.default_scope = openid
+  auth_oauth2.scope_prefix = cognito
+  auth_oauth2.additional_scopes.1 = email
+  auth_oauth2.additional_scopes.2 = profile
+  auth_oauth2.claim_mapping.username = sub
 
+  management.load_definitions = /app/load_definition.json
+  management.oauth_enabled = true
+  management.oauth_client_id = 531b71725rrg67r58lhd0gnrfv
+  management.oauth_authorization_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/oauth2/authorize
+  management.oauth_token_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/oauth2/token
+  management.oauth_userinfo_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/oauth2/userInfo
+  management.oauth_logout_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/logout
+  management.oauth_scope = openid email
     
 ## @param extraConfigurationExistingSecret Existing secret with the extra configuration to append to `configuration`.
 ## Must contain the key "extraConfiguration"
