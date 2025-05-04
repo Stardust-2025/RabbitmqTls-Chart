@@ -550,6 +550,8 @@ extraConfiguration: |-
   
   auth_oauth2.scope_aliases.3.alias = consumer/consumer_access
   auth_oauth2.scope_aliases.3.scope = rabbitmq.read:*/*
+
+  auth_oauth2.claim_mapping.username = email
     
 ## @param extraConfigurationExistingSecret Existing secret with the extra configuration to append to `configuration`.
 ## Must contain the key "extraConfiguration"
