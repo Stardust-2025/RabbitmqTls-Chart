@@ -486,9 +486,7 @@ configuration: |-
   management.listener.ssl = true
 
   auth_oauth2.token_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/oauth2/token
-  auth_oauth2.userinfo_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/oauth2/userInfo
   auth_oauth2.authorization_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/oauth2/authorize
-  auth_oauth2.revocation_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/oauth2/revoke
   auth_oauth2.end_session_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/logout
 
   
