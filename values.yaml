@@ -480,14 +480,14 @@ configuration: |-
 
   ## Management UI OAuth2 Login
   management.oauth_enabled = true
-  management.oauth_client_id = 531b71725rrg67r58lhd0gnrfv
+  management.oauth_client_id = 4nl2u89pomb86u8r63mol0oejs
   management.oauth_disable_basic_auth = true
   management.listener.port = 15671
   management.listener.ssl = true
 
-  auth_oauth2.token_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/oauth2/token
-  auth_oauth2.authorization_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/oauth2/authorize
-  auth_oauth2.end_session_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/logout
+  auth_oauth2.token_endpoint = https://rmq-domain-0f777320.auth.il-central-1.amazoncognito.com/oauth2/token
+  auth_oauth2.authorization_endpoint = https://rmq-domain-0f777320.auth.il-central-1.amazoncognito.com/oauth2/authorize
+  auth_oauth2.end_session_endpoint = https://rmq-domain-0f777320.auth.il-central-1.amazoncognito.com/logout
 
   
   ## Prometheus metrics
@@ -538,8 +538,8 @@ extraConfiguration: |-
   auth_backends.1 = rabbit_auth_backend_oauth2
   auth_backends.2 = internal
 
-  auth_oauth2.resource_server_id = 737i85vmoqv1fb2sngqc8q6euh
-  auth_oauth2.jwks_url = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_qfZsfVLI1/.well-known/jwks.json
+  auth_oauth2.resource_server_id = rabbitmq
+  auth_oauth2.jwks_url = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_h01mILjQW/.well-known/jwks.json
   auth_oauth2.default_scope = openid
   auth_oauth2.scope_prefix = cognito
   auth_oauth2.additional_scopes.1 = email
@@ -548,11 +548,11 @@ extraConfiguration: |-
 
   management.load_definitions = /app/load_definition.json
   management.oauth_enabled = true
-  management.oauth_client_id = 737i85vmoqv1fb2sngqc8q6euh
-  management.oauth_authorization_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/oauth2/authorize
-  management.oauth_token_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/oauth2/token
-  management.oauth_userinfo_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/oauth2/userInfo
-  management.oauth_logout_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/logout
+  management.oauth_client_id = 32r9e5v75drp0g7vpq7skn1eao
+  management.oauth_authorization_endpoint = https://rmq-domain-0f777320.auth.il-central-1.amazoncognito.com/oauth2/authorize
+  management.oauth_token_endpoint = https://rmq-domain-0f777320.auth.il-central-1.amazoncognito.com/oauth2/token
+  management.oauth_userinfo_endpoint = https://rmq-domain-0f777320.auth.il-central-1.amazoncognito.com/oauth2/userInfo
+  management.oauth_logout_endpoint = https://rmq-domain-0f777320.auth.il-central-1.amazoncognito.com/logout
   management.oauth_scope = openid email
     
 ## @param extraConfigurationExistingSecret Existing secret with the extra configuration to append to `configuration`.
