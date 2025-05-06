@@ -485,7 +485,6 @@ configuration: |-
   management.oauth_disable_basic_auth = true
   management.listener.port = 15671
   management.listener.ssl = true
-  management.load_definitions = /app/load_definition.json
   management.oauth_scopes = openid email
 
   auth_backends.1 = rabbit_auth_backend_oauth2
