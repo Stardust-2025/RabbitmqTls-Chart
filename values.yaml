@@ -486,8 +486,7 @@ configuration: |-
   management.listener.port = 15671
   management.listener.ssl = true
   management.load_definitions = /app/load_definition.json
-  management.oauth_scopes.1 = openid
-  management.oauth_scopes.2 = email
+  management.oauth_scopes = openid email
 
   auth_backends.1 = rabbit_auth_backend_oauth2
   auth_oauth2.issuer = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_h01mILjQW
