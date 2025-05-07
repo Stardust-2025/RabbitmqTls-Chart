@@ -542,14 +542,6 @@ extraConfiguration: |-
   disk_free_limit.absolute = 50MB
   vm_memory_high_watermark.absolute = 512MB
   consumer_timeout = 3600000
-
-  resources:
-  requests:
-    memory: 1.5Gi
-    cpu: 500m
-  limits:
-    memory: 2Gi
-    cpu: 1000m
     
 ## @param extraConfigurationExistingSecret Existing secret with the extra configuration to append to `configuration`.
 ## Must contain the key "extraConfiguration"
