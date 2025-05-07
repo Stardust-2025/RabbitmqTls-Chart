@@ -305,7 +305,7 @@ clustering:
 loadDefinition:
   ## @param loadDefinition.enabled Enable loading a RabbitMQ definitions file to configure RabbitMQ
   ##
-  enabled: false
+  enabled: true
   ## @param loadDefinition.file Name of the definitions file
   ##
   file: "/app/load_definition.json"
@@ -483,6 +483,7 @@ configuration: |-
   management.listener.port = 15671
   management.listener.ssl = true
   management.oauth_scopes = openid profile
+  management.load_definitions = /app/load_definition.json
 
   auth_backends.1 = rabbit_auth_backend_oauth2
   auth_oauth2.issuer = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_cr2AiqWjN
