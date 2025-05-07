@@ -473,7 +473,8 @@ configuration: |-
   listeners.ssl.default = 5671
   listeners.tcp = none
 
-
+  stream.listeners.ssl.1 = 30551
+  stream.listeners.tcp = none
 
   ## Management UI OAuth2 Login
   management.oauth_enabled = true
