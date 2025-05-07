@@ -40,13 +40,6 @@
 	],
 	"permissions": [
 		{
-			"user": "rabbitsoluser",
-			"vhost": "/",
-			"configure": ".*",
-			"write": ".*",
-			"read": ".*"
-		},
-		{
 			"user": "admin",
 			"vhost": "/",
 			"configure": ".*",
