@@ -493,9 +493,8 @@ configuration: |-
   auth_oauth2.preferred_username_claims.1 = email
   auth_oauth2.verify_aud = false
 
-  auth_oauth2.group_claim_name = cognito:groups
-  auth_oauth2.group_to_rabbitmq_tags.admin = administrator
-  auth_oauth2.default_user_tags = monitoring
+  auth_oauth2.preferred_username_claims.1 = cognito:username
+  auth_oauth2.preferred_username_claims.2 = username
 
   auth_oauth2.resource_server_id = rabbitmq
   auth_oauth2.jwks_url = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_cr2AiqWjN/.well-known/jwks.json
