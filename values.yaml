@@ -478,23 +478,23 @@ configuration: |-
 
   ## Management UI OAuth2 Login
   management.oauth_enabled = true
-  management.oauth_client_id = 4nl2u89pomb86u8r63mol0oejs
+  management.oauth_client_id = 54mnae8aui8c1u1mv2ppvsefrc
   management.oauth_disable_basic_auth = true
   management.listener.port = 15671
   management.listener.ssl = true
   management.oauth_scopes = openid profile
 
   auth_backends.1 = rabbit_auth_backend_oauth2
-  auth_oauth2.issuer = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_h01mILjQW
-  auth_oauth2.token_endpoint = https://rmq-domain-0f777320.auth.il-central-1.amazoncognito.com/oauth2/token
-  auth_oauth2.authorization_endpoint = https://rmq-domain-0f777320.auth.il-central-1.amazoncognito.com/oauth2/authorize
-  auth_oauth2.end_session_endpoint = https://rmq-domain-0f777320.auth.il-central-1.amazoncognito.com/logout
+  auth_oauth2.issuer = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_cr2AiqWjN
+  auth_oauth2.token_endpoint = https://rmq-domain-4c24ad23.auth.il-central-1.amazoncognito.com/oauth2/token
+  auth_oauth2.authorization_endpoint = https://rmq-domain-4c24ad23.auth.il-central-1.amazoncognito.com/oauth2/authorize
+  auth_oauth2.end_session_endpoint = https://rmq-domain-4c24ad23.auth.il-central-1.amazoncognito.com/logout
   auth_oauth2.additional_scopes_key = cognito:groups
   auth_oauth2.preferred_username_claims.1 = email
   auth_oauth2.verify_aud = false
 
   auth_oauth2.resource_server_id = rabbitmq
-  auth_oauth2.jwks_url = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_h01mILjQW/.well-known/jwks.json
+  auth_oauth2.jwks_url = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_cr2AiqWjN/.well-known/jwks.json
   auth_oauth2.scope_prefix = cognito
 
   
