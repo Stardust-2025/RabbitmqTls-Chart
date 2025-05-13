@@ -305,10 +305,10 @@ clustering:
 loadDefinition:
   ## @param loadDefinition.enabled Enable loading a RabbitMQ definitions file to configure RabbitMQ
   ##
-  enabled: true
+  enabled: false
   ## @param loadDefinition.file Name of the definitions file
   ##
-  file: "/opt/bitnami/rabbitmq/load_definition.json"
+  file: "/app/load_definition.json"
   ## @param loadDefinition.existingSecret Existing secret with the load definitions file
   ## Can be templated if needed, e.g:
   ## existingSecret: "{{ .Release.Name }}-load-definition"
