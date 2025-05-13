@@ -492,6 +492,7 @@ configuration: |-
   auth_oauth2.additional_scopes_key = cognito:groups
   auth_oauth2.preferred_username_claims.1 = username
   auth_oauth2.verify_aud = false
+  auth_oauth2.log_auth_attempts = true
 
   auth_oauth2.resource_server_id = rabbitmq
   auth_oauth2.jwks_url = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_cr2AiqWjN/.well-known/jwks.json
