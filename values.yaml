@@ -542,7 +542,6 @@ extraConfiguration: |-
   disk_free_limit.absolute = 50MB
   vm_memory_high_watermark.absolute = 512MB
   consumer_timeout = 3600000
-  management.load_definitions = /app/load_definition.json
     
 ## @param extraConfigurationExistingSecret Existing secret with the extra configuration to append to `configuration`.
 ## Must contain the key "extraConfiguration"
@@ -645,9 +644,7 @@ extraVolumeMounts:
   - name: rabbitmq-certs
     mountPath: /opt/bitnami/rabbitmq/certs
     readOnly: true
-  - name: load-definition
-    mountPath: /app/load_definition.json
-    subPath: load_definition.json
+
 ## @param extraVolumes Optionally specify extra list of additional volumes .
 ## Example:
 ## extraVolumes:
@@ -657,9 +654,7 @@ extraVolumeMounts:
 extraVolumes: 
   - name: rabbitmq-certs
     emptyDir: {}
-  - name: load-definition
-    secret:
-      secretName: load-definition
+
 ## @param extraSecrets Optionally specify extra secrets to be created by the chart.
 ## This can be useful when combined with load_definitions to automatically create the secret containing the definitions to be loaded.
 ## Example:
@@ -670,17 +665,7 @@ extraVolumes:
 ##         ...
 ##       }
 ##
-extraSecrets:
-  load-definition:
-    load_definition.json: |
-      {
-        "users": [
-          {
-            "name": "admin",
-            "tags": "administrator"
-          }
-        ]
-      }
+extraSecrets: []
 ## @param extraSecretsPrependReleaseName Set this flag to true if extraSecrets should be created with <release-name> prepended.
 ##
 extraSecretsPrependReleaseName: false
