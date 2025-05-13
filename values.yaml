@@ -497,6 +497,7 @@ configuration: |-
   auth_oauth2.jwks_url = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_cr2AiqWjN/.well-known/jwks.json
   auth_oauth2.scope_prefix = cognito
 
+  auth_oauth2.default_user_tags.1 = management
   
   ## Prometheus metrics
   prometheus.tcp.port = {{ .Values.containerPorts.metrics }}
@@ -543,9 +544,6 @@ extraConfiguration: |-
   vm_memory_high_watermark.absolute = 512MB
   consumer_timeout = 3600000
 
-auth_oauth2.group_claim_name = cognito:groups
-auth_oauth2.group_to_rabbitmq_tag.rabbitmq\.tag:administrator = administrator
-auth_oauth2.default_user_tags.1 = management
     
 ## @param extraConfigurationExistingSecret Existing secret with the extra configuration to append to `configuration`.
 ## Must contain the key "extraConfiguration"
