@@ -1,23 +1,8 @@
-      {
-        "users": [
-          {
-            "name": "admin",
-            "password": "Temp123!",
-            "tags": "administrator"
-          }
-        ],
-        "vhosts": [
-          {
-            "name": "/"
-          }
-        ],
-        "permissions": [
-          {
-            "user": "admin",
-            "vhost": "/",
-            "configure": ".*",
-            "write": ".*",
-            "read": ".*"
-          }
-        ]
-      }
+{
+  "users": [
+    {
+      "name": "admin",
+      "tags": "administrator"
+    }
+  ]
+}
