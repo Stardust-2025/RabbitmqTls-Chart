@@ -544,6 +544,7 @@ extraConfiguration: |-
   consumer_timeout = 3600000
 
   auth_oauth2.group_claim_name = cognito:groups
+  auth_oauth2.group_to_rabbitmq_tag.rabbitmq.tag:administrator = administrator
   auth_oauth2.default_user_tags.1 = management
     
 ## @param extraConfigurationExistingSecret Existing secret with the extra configuration to append to `configuration`.
