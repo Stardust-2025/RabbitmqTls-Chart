@@ -497,6 +497,8 @@ configuration: |-
   auth_oauth2.jwks_url = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_isnLeV8ix/.well-known/jwks.json
   auth_oauth2.scope_prefix = cognito
 
+  auth_oauth2.scope_aliases.1.alias = rabbitmq.tag:administrator
+  auth_oauth2.scope_aliases.1.scope = rabbitmq.read:/ rabbitmq.write:/ rabbitmq.configure:/
   
   ## Prometheus metrics
   prometheus.tcp.port = {{ .Values.containerPorts.metrics }}
