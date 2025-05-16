@@ -2,7 +2,7 @@
   "users": [
     {
       "name": "admin",
-      "password": "Temp123!",             <-- Add this!
+      "password": "Temp123!",      
       "tags": ["administrator"]
     }
   ],
