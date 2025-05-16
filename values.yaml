@@ -260,6 +260,16 @@ memoryHighWatermark:
 ## @param plugins List of default plugins to enable (should only be altered to remove defaults; for additional plugins use `extraPlugins`)
 ##
 plugins: "rabbitmq_management rabbitmq_peer_discovery_k8s rabbitmq_stream"
+
+oauth2:
+  enabled: true
+  resourceServerId: "7d2i1o179biu5bkj3ovii5u0ge"
+  userinfoEndpoint: "https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/oauth2/userInfo"
+  tokenEndpoint: "https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/oauth2/token"
+  authorizationEndpoint: "https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/oauth2/authorize"
+  clientId: "7d2i1o179biu5bkj3ovii5u0ge"
+  clientSecret: ""
+  usernameClaim: "username"
 ## rabbitmq_stream
 
 ## @param queue_master_locator Changes the queue_master_locator setting in the rabbitmq config file
