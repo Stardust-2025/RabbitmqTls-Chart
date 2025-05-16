@@ -479,7 +479,6 @@ configuration: |-
   ## Management UI OAuth2 Login
   management.oauth_enabled = true
   management.oauth_client_id = 7d2i1o179biu5bkj3ovii5u0ge
-  management.oauth.client_secret = ""
   management.oauth_disable_basic_auth = true
   management.listener.port = 15671
   management.listener.ssl = true
@@ -490,7 +489,6 @@ configuration: |-
   auth_oauth2.token_endpoint = https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/oauth2/token
   auth_oauth2.authorization_endpoint = https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/oauth2/authorize
   auth_oauth2.end_session_endpoint = https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/logout
-  auth_oauth2.user_info_endpoint = https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/userinfo
   auth_oauth2.additional_scopes_key = cognito:groups
   auth_oauth2.preferred_username_claims.1 = username
   auth_oauth2.verify_aud = false
