@@ -478,7 +478,7 @@ configuration: |-
   stream.listeners.tcp = none
 
   ## Management UI OAuth2 Login
- # management.oauth_enabled = true
+  management.oauth_enabled = false
   management.oauth_disable_basic_auth = false
   management.listener.port = 15671
   management.listener.ssl = true
