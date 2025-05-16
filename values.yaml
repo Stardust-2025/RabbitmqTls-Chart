@@ -485,7 +485,8 @@ configuration: |-
   management.oauth_scopes = openid profile
   management.oauth_client_id = 7d2i1o179biu5bkj3ovii5u0ge
 
-  
+  auth_oauth2.token_endpoint = https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/oauth2/token
+
 
   auth_oauth2.resource_server_id = rabbitmq
   auth_oauth2.jwks_url = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_isnLeV8ix/.well-known/jwks.json
