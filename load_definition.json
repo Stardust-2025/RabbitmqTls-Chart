@@ -2,7 +2,17 @@
   "users": [
     {
       "name": "admin",
-      "tags": "administrator"
+      "password": "Temp123!",             <-- Add this!
+      "tags": ["administrator"]
+    }
+  ],
+  "permissions": [
+    {
+      "user": "admin",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
     }
   ]
 }
