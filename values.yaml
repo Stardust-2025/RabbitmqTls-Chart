@@ -489,6 +489,7 @@ configuration: |-
   auth_oauth2.authorization_endpoint = https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/oauth2/authorize
   auth_oauth2.additional_scopes_key = cognito:groups
   auth_oauth2.preferred_username_claims.1 = username
+  auth_oauth2.verify_aud = false
 
   auth_oauth2.resource_server_id = rabbitmq
   auth_oauth2.jwks_url = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_isnLeV8ix/.well-known/jwks.json
