@@ -488,7 +488,7 @@ configuration: |-
   auth_oauth2.issuer = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_isnLeV8ix
   auth_oauth2.token_endpoint = https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/oauth2/token
   auth_oauth2.authorization_endpoint = https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/oauth2/authorize
-  auth_oauth2.end_session_endpoint = https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/logout
+  auth_oauth2.end_session_endpoint = https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/userinfo
   auth_oauth2.additional_scopes_key = cognito:groups
   auth_oauth2.preferred_username_claims.1 = username
   auth_oauth2.verify_aud = false
