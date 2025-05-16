@@ -1,8 +1,13 @@
 {
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
   "users": [
     {
       "name": "admin",
-      "password": "Temp123!",      
+      "password": "Temp123!",
       "tags": ["administrator"]
     }
   ],
