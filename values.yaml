@@ -261,15 +261,6 @@ memoryHighWatermark:
 ##
 plugins: "rabbitmq_management rabbitmq_peer_discovery_k8s rabbitmq_stream"
 
-oauth2:
-  enabled: true
-  resourceServerId: "7d2i1o179biu5bkj3ovii5u0ge"
-  userinfoEndpoint: "https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/oauth2/userInfo"
-  tokenEndpoint: "https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/oauth2/token"
-  authorizationEndpoint: "https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/oauth2/authorize"
-  clientId: "7d2i1o179biu5bkj3ovii5u0ge"
-  clientSecret: ""
-  usernameClaim: "username"
 ## rabbitmq_stream
 
 ## @param queue_master_locator Changes the queue_master_locator setting in the rabbitmq config file
@@ -488,20 +479,11 @@ configuration: |-
 
   ## Management UI OAuth2 Login
   management.oauth_enabled = true
-  management.oauth_client_id = 7d2i1o179biu5bkj3ovii5u0ge
   management.oauth_disable_basic_auth = true
   management.listener.port = 15671
   management.listener.ssl = true
   management.oauth_scopes = openid profile
 
-  auth_backends.1 = rabbit_auth_backend_oauth2
-  auth_oauth2.issuer = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_isnLeV8ix
-  auth_oauth2.token_endpoint = https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/oauth2/token
-  auth_oauth2.authorization_endpoint = https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/oauth2/authorize
-  auth_oauth2.end_session_endpoint = https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/logout
-  auth_oauth2.additional_scopes_key = cognito:groups
-  auth_oauth2.preferred_username_claims.1 = username
-  auth_oauth2.verify_aud = false
 
   auth_oauth2.resource_server_id = rabbitmq
   auth_oauth2.jwks_url = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_isnLeV8ix/.well-known/jwks.json
