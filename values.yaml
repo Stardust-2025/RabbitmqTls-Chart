@@ -480,15 +480,24 @@ configuration: |-
 
   ## Management UI OAuth2 Login
   management.oauth_enabled = true
-  management.oauth_client_id = 531b71725rrg67r58lhd0gnrfv
-  management.oauth_disable_basic_auth = true
+  management.oauth_client_id = 7d2i1o179biu5bkj3ovii5u0ge
+  management.oauth_disable_basic_auth = false
   management.listener.port = 15671
   management.listener.ssl = true
+  management.oauth_userinfo_endpoint = https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/oauth2/userInfo
+  management.oauth_scope = openid profile
 
-  auth_oauth2.token_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/oauth2/token
-  auth_oauth2.authorization_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/oauth2/authorize
-  auth_oauth2.end_session_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/logout
 
+  auth_backends.1 = oauth2
+  
+  auth_oauth2.jwks_url = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_isnLeV8ix/.well-known/jwks.json
+  auth_oauth2.issuer = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_isnLeV8i
+  auth_oauth2.resource_server_id = rabbitmq
+  auth_oauth2.additional_scopes_key = cognito:groups
+  auth_oauth2.verify_aud = false
+  auth_oauth2.preferred_username_claims.1 = username
+
+  
   
   ## Prometheus metrics
   prometheus.tcp.port = {{ .Values.containerPorts.metrics }}
@@ -535,25 +544,6 @@ extraConfiguration: |-
   vm_memory_high_watermark.absolute = 512MB
   consumer_timeout = 3600000
   
-  auth_backends.1 = rabbit_auth_backend_oauth2
-  auth_backends.2 = internal
-
-  auth_oauth2.resource_server_id = 737i85vmoqv1fb2sngqc8q6euh
-  auth_oauth2.jwks_url = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_qfZsfVLI1/.well-known/jwks.json
-  auth_oauth2.default_scope = openid
-  auth_oauth2.scope_prefix = cognito
-  auth_oauth2.additional_scopes.1 = email
-  auth_oauth2.additional_scopes.2 = profile
-  auth_oauth2.claim_mapping.username = sub
-
-  management.load_definitions = /app/load_definition.json
-  management.oauth_enabled = true
-  management.oauth_client_id = 737i85vmoqv1fb2sngqc8q6euh
-  management.oauth_authorization_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/oauth2/authorize
-  management.oauth_token_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/oauth2/token
-  management.oauth_userinfo_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/oauth2/userInfo
-  management.oauth_logout_endpoint = https://rmq-domain-a22b758a.auth.il-central-1.amazoncognito.com/logout
-  management.oauth_scope = openid email
     
 ## @param extraConfigurationExistingSecret Existing secret with the extra configuration to append to `configuration`.
 ## Must contain the key "extraConfiguration"
