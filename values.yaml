@@ -482,7 +482,7 @@ configuration: |-
   management.oauth_disable_basic_auth = true
   management.listener.port = 15671
   management.listener.ssl = true
-  management.oauth_scopes = openid profile
+  management.oauth_scopes = openid
 
   auth_backends.1 = rabbit_auth_backend_oauth2
   auth_oauth2.issuer = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_isnLeV8ix
