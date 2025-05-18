@@ -9,6 +9,8 @@
 	"users": [
 		{
 			"name": "admin",
+			"password_hash": "vxOHD+WwTOaUbObNPQp7oGCL5Pz+Rwm8fZ2iW9EFs48QrR9r",
+			"hashing_algorithm": "rabbit_password_hashing_sha256",
 			"tags": [
 				"administrator"
 			],
