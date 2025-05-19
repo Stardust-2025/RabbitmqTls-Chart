@@ -459,46 +459,32 @@ configuration: |-
   loopback_users.guest = {{ .Values.auth.enableLoopbackUser }}
   {{- end }}
 
-  ## TLS Settings
-  ssl_options.certfile = /opt/bitnami/rabbitmq/certs/cert.pem
-  ssl_options.keyfile = /opt/bitnami/rabbitmq/certs/key.pem
-  ssl_options.cacertfile = /opt/bitnami/rabbitmq/certs/cacert.pem
-  ssl_options.verify = verify_none
-  ssl_options.fail_if_no_peer_cert = false
-  ssl_options.client_renegotiation = false
-  ssl_options.secure_renegotiate = true
-  ssl_options.honor_ecc_order = true
-  ssl_options.honor_cipher_order = true
+  ## TLS Settings  auth_backends.1 = oauth2
 
-  listeners.ssl.default = 5671
-  listeners.tcp = none
-
-  stream.listeners.ssl.1 = 30551
-  stream.listeners.tcp = none
-
-  ## Management UI OAuth2 Login
-  management.oauth_enabled = true
-  management.oauth_client_id = 7d2i1o179biu5bkj3ovii5u0ge
-  management.oauth_disable_basic_auth = false
-  management.listener.port = 15671
-  management.listener.ssl = true
-  management.oauth_scopes = openid
-
-  auth_backends.1 = rabbit_auth_backend_oauth2
-  auth_oauth2.issuer = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_isnLeV8ix
-  auth_oauth2.token_endpoint = https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/oauth2/token
-  auth_oauth2.authorization_endpoint = https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/oauth2/authorize
-  auth_oauth2.end_session_endpoint = https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/logout
-  auth_oauth2.additional_scopes_key = cognito:groups
-  auth_oauth2.preferred_username_claims.1 = username
-  auth_oauth2.verify_aud = false
-
+  auth_oauth2.issuer = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_GxBN2Mh7C
+  auth_oauth2.jwks_url = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_GxBN2Mh7C/.well-known/jwks.json
   auth_oauth2.resource_server_id = rabbitmq
-  auth_oauth2.jwks_url = https://cognito-idp.il-central-1.amazonaws.com/il-central-1_isnLeV8ix/.well-known/jwks.json
-  auth_oauth2.scope_prefix = cognito
+  auth_oauth2.verify_aud = false
+  auth_oauth2.additional_scopes_key = scope
+  auth_oauth2.preferred_username_claims.1 = username
 
-  auth_oauth2.scope_aliases.1.alias = rabbitmq.tag:administrator
-  auth_oauth2.scope_aliases.1.scope = rabbitmq.read:/ rabbitmq.write:/ rabbitmq.configure:/
+  auth_oauth2.scope_to_rabbitmq_tag.tag:administrator = administrator
+  auth_oauth2.scope_to_rabbitmq_tag.tag:management = management
+  auth_oauth2.scope_to_rabbitmq_tag.tag:monitoring = monitoring
+
+  management.oauth_enabled = true
+  management.oauth_client_id = 3mnejjgha3q0l43lr906slt7i3
+  management.oauth_scopes = openid profile rabbitmq.tag:administrator
+  management.oauth_disable_basic_auth = true
+  management.listener.ssl = true
+  management.listener.port = 15671
+
+  ssl_options.certfile = /opt/bitnami/rabbitmq/certs/tls.crt
+  ssl_options.keyfile = /opt/bitnami/rabbitmq/certs/tls.key
+  ssl_options.cacertfile = /opt/bitnami/rabbitmq/certs/ca.crt
+  ssl_options.verify = verify_peer
+  ssl_options.fail_if_no_peer_cert = true
+  listeners.ssl.default = 5671
   
   ## Prometheus metrics
   prometheus.tcp.port = {{ .Values.containerPorts.metrics }}
