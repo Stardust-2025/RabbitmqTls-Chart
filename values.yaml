@@ -493,6 +493,8 @@ configuration: |-
   management.listener.ssl = true 
   management.listener.port = 15671
 
+  management.oauth_token_endpoint = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq/protocol/openid-connect/token
+
   ## Prometheus metrics
   prometheus.tcp.port = {{ .Values.containerPorts.metrics }}
 
