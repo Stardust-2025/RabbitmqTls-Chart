@@ -481,8 +481,6 @@ configuration: |-
   auth_oauth2.https.verify = verify_none
   auth_oauth2.preferred_username_claims.1 = user_name
   auth_oauth2.default_key = keycloak
-  auth_oauth2.vhost_path = resource_access.rabbitmq.roles
-  auth_oauth2.resource_path = resource_access.rabbitmq.roles
    
   management.oauth_enabled = true
   management.oauth_client_id = rabbitmq-client
