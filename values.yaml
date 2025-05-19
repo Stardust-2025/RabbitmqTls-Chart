@@ -500,8 +500,8 @@ configuration: |-
   management.ssl.cacertfile = /opt/bitnami/rabbitmq/certs/cacert.pem
   management.ssl.certfile = /opt/bitnami/rabbitmq/certs/cert.pem
   management.ssl.keyfile = /opt/bitnami/rabbitmq/certs/key.pem
-  management.ssl.verify = verify_peer
-  management.ssl.fail_if_no_peer_cert = true
+  management.ssl.verify = verify_none
+
 
 
   
