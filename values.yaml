@@ -489,9 +489,15 @@ configuration: |-
 
   auth_oauth2.default_oauth_provider = keycloak
 
-  auth_oauth2.group_to_rabbitmq_tag.rabbitmq\.tag:administrator = administrator
-  auth_oauth2.group_to_rabbitmq_tag.rabbitmq\.tag:management = management
-  auth_oauth2.group_to_rabbitmq_tag.rabbitmq\.tag:monitoring = monitoring
+  auth_oauth2.group_to_rabbitmq_tag.1.group = rabbitmq.tag:administrator
+  auth_oauth2.group_to_rabbitmq_tag.1.tag = administrator
+  
+  auth_oauth2.group_to_rabbitmq_tag.2.group = rabbitmq.tag:management
+  auth_oauth2.group_to_rabbitmq_tag.2.tag = management
+  
+  auth_oauth2.group_to_rabbitmq_tag.3.group = rabbitmq.tag:monitoring
+  auth_oauth2.group_to_rabbitmq_tag.3.tag = monitoring
+
 
   management.oauth_enabled = true
   management.oauth_client_id = rabbitmq-client
