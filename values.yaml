@@ -489,7 +489,7 @@ configuration: |-
   management.oauth_disable_basic_auth = true
   management.listener.ssl = true
   management.listener.port = 15671
-  management.oauth_provider_url = keycloak.keycloak.svc.cluster.local:443/auth/realms/rabbitmq
+  management.oauth_provider_url = keycloak.keycloak.svc.cluster.local/auth/realms/rabbitmq
 
   loopback_users = none
 
