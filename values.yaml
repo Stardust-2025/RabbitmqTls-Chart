@@ -497,11 +497,6 @@ configuration: |-
   management.oauth_disable_basic_auth = false
   management.listener.ssl = true
   management.listener.port = 15671
-  management.ssl.cacertfile = /opt/bitnami/rabbitmq/certs/cacert.pem
-  management.ssl.certfile = /opt/bitnami/rabbitmq/certs/cert.pem
-  management.ssl.keyfile = /opt/bitnami/rabbitmq/certs/key.pem
-  management.ssl.verify = verify_none
-
 
 
   
