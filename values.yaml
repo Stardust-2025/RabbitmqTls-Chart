@@ -479,11 +479,11 @@ configuration: |-
   management.listener.ssl = true
   management.listener.port = 15671
 
-  ssl_options.certfile = /opt/bitnami/rabbitmq/certs/tls.crt
-  ssl_options.keyfile = /opt/bitnami/rabbitmq/certs/tls.key
-  ssl_options.cacertfile = /opt/bitnami/rabbitmq/certs/ca.crt
-  ssl_options.verify = verify_peer
-  ssl_options.fail_if_no_peer_cert = true
+  ssl_options.certfile = /opt/bitnami/rabbitmq/certs/cert.pem
+  ssl_options.keyfile = /opt/bitnami/rabbitmq/certs/key.pem
+  ssl_options.cacertfile = /opt/bitnami/rabbitmq/certs/cacert.pem
+  ssl_options.verify = verify_none
+  ssl_options.fail_if_no_peer_cert = false
   listeners.ssl.default = 5671
   
   ## Prometheus metrics
