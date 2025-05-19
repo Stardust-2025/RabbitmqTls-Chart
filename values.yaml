@@ -464,11 +464,6 @@ configuration: |-
   ssl_options.keyfile = /opt/bitnami/rabbitmq/certs/key.pem
   ssl_options.cacertfile = /opt/bitnami/rabbitmq/certs/cacert.pem
   ssl_options.verify = verify_none
-  ssl_options.fail_if_no_peer_cert = false
-  ssl_options.client_renegotiation = false
-  ssl_options.secure_renegotiate = true
-  ssl_options.honor_ecc_order = true
-  ssl_options.honor_cipher_order = true
 
   listeners.ssl.default = 5671
   listeners.tcp = none
@@ -477,27 +472,24 @@ configuration: |-
   stream.listeners.tcp = none
 
   auth_backends.1 = oauth2
-  
   auth_oauth2.resource_server_id = rabbitmq
   auth_oauth2.issuer = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq
   auth_oauth2.token_endpoint = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq/protocol/openid-connect/token
   auth_oauth2.jwks_url = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq/protocol/openid-connect/certs
-  auth_oauth2.additional_scopes_key = scope
+  auth_oauth2.additional_scopes_key = extra_scope
   auth_oauth2.verify_aud = false
   auth_oauth2.https.verify = verify_none
-  
-  auth_oauth2.preferred_username_claims.1 = preferred_username
-  auth_oauth2.preferred_username_claims.2 = email
-  auth_oauth2.preferred_username_claims.3 = sub
-    
+  auth_oauth2.preferred_username_claims.1 = user_name
+   
   management.oauth_enabled = true
   management.oauth_client_id = rabbitmq-client
   management.oauth_client_secret = tDLCpQbYdOqz2bmv9NYt1SrkK7F7oEG3
   management.oauth_scopes = openid profile rabbitmq.tag:administrator
-  management.oauth_disable_basic_auth = false
+  management.oauth_disable_basic_auth = true
   management.listener.ssl = true
   management.listener.port = 15671
 
+  loopback_users = none
 
   
 
