@@ -476,36 +476,22 @@ configuration: |-
   stream.listeners.ssl.1 = 30551
   stream.listeners.tcp = none
 
-
-  auth_backends.1 = oauth2
-
-  auth_oauth2.issuer = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq
-  auth_oauth2.jwks_url = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq/protocol/openid-connect/certs
-  auth_oauth2.resource_server_id = rabbitmq-client
-  auth_oauth2.scope_claim_name = scope
-  auth_oauth2.group_claim_name = realm_access.roles
-  auth_oauth2.verify_jwt_signature = true
-  auth_oauth2.verify_aud = false
-
-  auth_oauth2.default_oauth_provider = keycloak
-
-  auth_oauth2.group_to_rabbitmq_tag.1.group = rabbitmq.tag:administrator
-  auth_oauth2.group_to_rabbitmq_tag.1.tag = administrator
-  
-  auth_oauth2.group_to_rabbitmq_tag.2.group = rabbitmq.tag:management
-  auth_oauth2.group_to_rabbitmq_tag.2.tag = management
-  
-  auth_oauth2.group_to_rabbitmq_tag.3.group = rabbitmq.tag:monitoring
-  auth_oauth2.group_to_rabbitmq_tag.3.tag = monitoring
-
+  auth_backends.1 = rabbit_auth_backend_oauth2
 
   management.oauth_enabled = true
   management.oauth_client_id = rabbitmq-client
   management.oauth_client_secret = tDLCpQbYdOqz2bmv9NYt1SrkK7F7oEG3
-  management.oauth_token_endpoint = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq/protocol/openid-connect/token
-  management.oauth_disable_basic_auth = false
+  management.oauth_scopes = openid profile rabbitmq.tag:administrator
+  
+  auth_oauth2.resource_server_id = rabbitmq
+  auth_oauth2.preferred_username_claims.1 = user_name
+  auth_oauth2.issuer = https://nginx/realms/test
+  auth_oauth2.https.cacertfile = /certs/keycloak/ca_keycloak_certificate.pem
+  auth_oauth2.additional_scopes_key = extra_scope
+  auth_oauth2.https.verify = verify_none
+  management.oauth_disable_basic_auth = true
+  management.listener.ssl = true 
   management.listener.port = 15671
-  management.listener.ssl = true
 
   ## Prometheus metrics
   prometheus.tcp.port = {{ .Values.containerPorts.metrics }}
@@ -533,7 +519,7 @@ configuration: |-
 
   ## Console Logging
   log.console = true
-  log.console.level = info
+  log.console.level = debug
 
 
 ## @param configurationExistingSecret Existing secret with the configuration to use as rabbitmq.conf.
