@@ -473,9 +473,9 @@ configuration: |-
 
   auth_backends.1 = oauth2
   auth_oauth2.resource_server_id = rabbitmq
-  auth_oauth2.issuer = https://keycloak.keycloak.svc.cluster.local/realms/rabbitmq
-  auth_oauth2.token_endpoint = https://keycloak.keycloak.svc.cluster.local/realms/rabbitmq/protocol/openid-connect/token
-  auth_oauth2.jwks_url = https://keycloak.keycloak.svc.cluster.local/realms/rabbitmq/protocol/openid-connect/certs
+  auth_oauth2.issuer = https://keycloak.keycloak.svc.cluster.local:443/realms/rabbitmq
+  auth_oauth2.token_endpoint = https://keycloak.keycloak.svc.cluster.local:443/realms/rabbitmq/protocol/openid-connect/token
+  auth_oauth2.jwks_url = https://keycloak.keycloak.svc.cluster.local:443/realms/rabbitmq/protocol/openid-connect/certs
   auth_oauth2.additional_scopes_key = extra_scope
   auth_oauth2.verify_aud = false
   auth_oauth2.https.verify = verify_none
@@ -489,7 +489,7 @@ configuration: |-
   management.oauth_disable_basic_auth = true
   management.listener.ssl = true
   management.listener.port = 15671
-  management.oauth_provider_url = https://keycloak.keycloak.svc.cluster.local/auth/realms/rabbitmq
+  management.oauth_provider_url = https://keycloak.keycloak.svc.cluster.local:443/auth/realms/rabbitmq
 
   loopback_users = none
 
