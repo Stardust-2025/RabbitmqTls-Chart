@@ -356,6 +356,7 @@ containerPorts:
   amqpTls: 5671
   dist: 25672
   managerTls: 15671
+  manager: null
   epmd: 4369
   metrics: 9419
   stream: 30551
@@ -1085,6 +1086,7 @@ service:
     amqpTls: 5671
     dist: 25673
     managerTls: 15671
+    manager: null
     metrics: 9419
     epmd: 4369
   ## Service ports name
@@ -1102,6 +1104,7 @@ service:
     metrics: "metrics"
     epmd: "epmd"
     managerTls: "https-stats"
+    manager: "http-stats"
   ## Node ports to expose
   ## @param service.nodePorts.amqp Node port for Ampq
   ## @param service.nodePorts.amqpTls Node port for Ampq TLS
@@ -1115,6 +1118,7 @@ service:
     amqpTls: "30670"
     dist: "30671"
     managerTls: "31671"
+    manager: ""
     epmd: ""
     metrics: ""
 
