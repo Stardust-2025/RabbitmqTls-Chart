@@ -1099,7 +1099,6 @@ service:
     amqp: "amqp"
     amqpTls: "amqp-tls"
     dist: "dist"
-    manager: "http-stats"
     metrics: "metrics"
     epmd: "epmd"
     managerTls: "https-stats"
