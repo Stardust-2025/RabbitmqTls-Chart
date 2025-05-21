@@ -834,9 +834,9 @@ resources:
 ##
 livenessProbe:
   enabled: true
-  exec:
-    command:
-    - ls
+  httpGet:
+    path: /health/checks/alarms
+    port: 15671
   initialDelaySeconds: 120
   timeoutSeconds: 60
   periodSeconds: 60
