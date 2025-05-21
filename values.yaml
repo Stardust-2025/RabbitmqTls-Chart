@@ -832,7 +832,7 @@ resources:
 ## @param livenessProbe.successThreshold Success threshold for livenessProbe
 ##
 livenessProbe:
-  enabled: true
+  enabled: false
   initialDelaySeconds: 120
   timeoutSeconds: 60
   periodSeconds: 60
