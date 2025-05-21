@@ -476,12 +476,14 @@ configuration: |-
   auth_oauth2.issuer = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2
   auth_oauth2.token_endpoint = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2/protocol/openid-connect/token
   auth_oauth2.jwks_url = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2/protocol/openid-connect/certs
-  auth_oauth2.additional_scopes_key = extra_scope
+  auth_oauth2.additional_scopes_key = scope
   auth_oauth2.verify_aud = false
   auth_oauth2.https.verify = verify_none
-  auth_oauth2.preferred_username_claims.1 = user_name
-  auth_oauth2.default_key = keycloak
-   
+  auth_oauth2.preferred_username_claims.1 = preferred_username
+
+  auth_oauth2.group_claim_name = groups
+  auth_oauth2.scope_to_rabbitmq_tag.rabbitmq\.tag:administrator = administrator
+  
   management.oauth_enabled = true
   management.oauth_client_id = rabbitmq-client
   management.oauth_client_secret = tDLCpQbYdOqz2bmv9NYt1SrkK7F7oEG3
@@ -489,7 +491,6 @@ configuration: |-
   management.oauth_disable_basic_auth = true
   management.listener.ssl = true
   management.listener.port = 15671
-  management.oauth_provider_url = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/auth/realms/rabbitmq2
 
   loopback_users = none
 
