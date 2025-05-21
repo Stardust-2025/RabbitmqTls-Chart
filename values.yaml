@@ -481,7 +481,6 @@ configuration: |-
   auth_oauth2.https.verify = verify_none
   auth_oauth2.preferred_username_claims.1 = preferred_username
 
-  auth_oauth2.tags_from_claim = groups
   
   management.oauth_enabled = true
   management.oauth_client_id = rabbitmq-client
