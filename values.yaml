@@ -837,7 +837,6 @@ livenessProbe:
   httpGet:
     path: /
     port: 15671
-    scheme: HTTPS
   initialDelaySeconds: 120
   timeoutSeconds: 60
   periodSeconds: 60
