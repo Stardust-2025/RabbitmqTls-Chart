@@ -835,7 +835,7 @@ resources:
 livenessProbe:
   enabled: true
   httpGet:
-    path: /health/checks/alarms
+    url: /health/checks/alarms
     port: 15671
   initialDelaySeconds: 120
   timeoutSeconds: 60
