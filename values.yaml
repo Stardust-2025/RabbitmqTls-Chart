@@ -355,7 +355,6 @@ containerPorts:
   amqp: 5672
   amqpTls: 5671
   dist: 25672
-  manager: 15672
   managerTls: 15671
   epmd: 4369
   metrics: 9419
@@ -1085,7 +1084,6 @@ service:
     amqp: 5672
     amqpTls: 5671
     dist: 25673
-    manager: 15672
     managerTls: 15671
     metrics: 9419
     epmd: 4369
