@@ -1114,7 +1114,6 @@ service:
     amqp: "30673"
     amqpTls: "30670"
     dist: "30671"
-    manager: "31677"
     managerTls: "31671"
     epmd: ""
     metrics: ""
