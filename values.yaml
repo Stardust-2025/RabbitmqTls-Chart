@@ -906,6 +906,21 @@ initContainers:
         jq -r '.cert' /tmp/secret.json > /certs/cert.pem && \
         jq -r '.key' /tmp/secret.json > /certs/key.pem && \
         jq -r '.cacert' /tmp/secret.json > /certs/cacert.pem
+
+  - name: warmup-keycloak
+    image: curlimages/curl:8.6.0
+    command:
+      - sh
+      - -c
+      - |
+        echo "Warming up Keycloak realm..."
+        for i in $(seq 1 10); do
+          curl -k --fail https://keycloak.keycloak.svc.cluster.local/auth/realms/rabbitmq2/.well-known/openid-configuration && exit 0
+          echo "Waiting for Keycloak... ($i)"
+          sleep 5
+        done
+        echo "Failed to contact Keycloak"
+        exit 1
     volumeMounts:
       - name: rabbitmq-certs
         mountPath: /certs
