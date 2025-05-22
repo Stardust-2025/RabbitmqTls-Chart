@@ -473,7 +473,7 @@ configuration: |-
 
   auth_backends.1 = oauth2
   auth_oauth2.resource_server_id = rabbitmq
-  auth_oauth2.issuer = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2
+  auth_oauth2.issuer = https://keycloak.keycloak.svc.cluster.local/realms/rabbitmq2
   auth_oauth2.token_endpoint = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2/protocol/openid-connect/token
   auth_oauth2.jwks_url = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2/protocol/openid-connect/certs
   auth_oauth2.additional_scopes_key = extra_scope
@@ -920,21 +920,6 @@ initContainers:
           secretKeyRef:
             name: aws-creds
             key: secret_key
-            
-  - name: warmup-keycloak
-    image: curlimages/curl:8.6.0
-    command:
-      - sh
-      - -c
-      - |
-        echo "Warming up Keycloak realm..."
-        for i in $(seq 1 10); do
-          curl -k --fail https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2/.well-known/openid-configuration && exit 0
-          echo "Waiting for Keycloak... ($i)"
-          sleep 5
-        done
-        echo "Failed to contact Keycloak"
-        exit 1  
 ## @param sidecars Add sidecar containers to the RabbitMQ pod
 ## Example:
 ## sidecars:
