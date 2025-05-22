@@ -481,6 +481,7 @@ configuration: |-
   auth_oauth2.https.verify = verify_peer
   auth_oauth2.preferred_username_claims.1 = user_name
   auth_oauth2.default_key = keycloak
+  auth_oauth2.https.cacertfile = /opt/bitnami/rabbitmq/certs/cacert.pem
    
   management.oauth_enabled = true
   management.oauth_client_id = rabbitmq-client
