@@ -929,7 +929,7 @@ initContainers:
       - |
         echo "Warming up Keycloak realm..."
         for i in $(seq 1 10); do
-          curl -k --fail https://keycloak.keycloak.svc.cluster.local/auth/realms/rabbitmq2/.well-known/openid-configuration && exit 0
+          curl -k --fail https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/auth/realms/rabbitmq2/.well-known/openid-configuration && exit 0
           echo "Waiting for Keycloak... ($i)"
           sleep 5
         done
