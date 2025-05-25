@@ -487,7 +487,6 @@ configuration: |-
   auth_oauth2.additional_scopes_key = extra_scope
   auth_oauth2.verify_aud = false
 
-  auth_oauth2.scope_prefix = 
   auth_oauth2.resource_server_type = rabbitmq
   
   management.oauth_enabled = true
