@@ -475,7 +475,7 @@ configuration: |-
   auth_oauth2.resource_server_type = rabbitmq
   auth_oauth2.issuer = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2
   auth_oauth2.token_endpoint = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2/protocol/openid-connect/token
-  auth_oauth2.jwks_uri = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2/protocol/openid-connect/certs
+  auth_oauth2.jwks_url = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2/protocol/openid-connect/certs
   auth_oauth2.oauth_providers.keycloak.https.verify = verify_none
   auth_oauth2.additional_scopes_key = extra_scope
   auth_oauth2.verify_aud = false
