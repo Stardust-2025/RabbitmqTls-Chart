@@ -472,7 +472,7 @@ configuration: |-
   stream.listeners.tcp = none
 
   auth_backends.1 = oauth2
-  auth_oauth2.resource_server_id = rabbitmq
+  auth_oauth2.resource_server_type = keycloak
   auth_oauth2.issuer = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2
   auth_oauth2.token_endpoint = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2/protocol/openid-connect/token
   auth_oauth2.jwks_uri = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2/protocol/openid-connect/certs
