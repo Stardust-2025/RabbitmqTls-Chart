@@ -464,29 +464,28 @@ configuration: |-
   ssl_options.keyfile = /opt/bitnami/rabbitmq/certs/key.pem
   ssl_options.cacertfile = /opt/bitnami/rabbitmq/certs/cacert.pem
   ssl_options.verify = verify_none
-
   listeners.ssl.default = 5671
   listeners.tcp = none
-
   stream.listeners.ssl.1 = 30551
   stream.listeners.tcp = none
 
   auth_backends.1 = oauth2
+  
   auth_oauth2.resource_server_id = rabbitmq
+
+  auth_oauth2.issuer = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2
+  auth_oauth2.jwks_uri = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2/protocol/openid-connect/certs
+  auth_oauth2.https.verify = verify_none
+
   auth_oauth2.oauth_providers.keycloak.issuer = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2
-  auth_oauth2.oauth_providers.keycloak.token_endpoint = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2/protocol/openid-connect/token
   auth_oauth2.oauth_providers.keycloak.jwks_uri = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2/protocol/openid-connect/certs
   auth_oauth2.oauth_providers.keycloak.https.verify = verify_none
-  auth_oauth2.additional_scopes_key = extra_scope
-  auth_oauth2.verify_aud = false
-  auth_oauth2.https.verify = verify_none
   
   auth_oauth2.preferred_username_claims.1 = preferred_username
   auth_oauth2.preferred_username_claims.2 = client_id
-   
-  auth_oauth2.default_key = keycloak
-  auth_oauth2.oauth_providers.keycloak.https.cacertfile = /opt/bitnami/rabbitmq/certs/keycloak_ca.pem
 
+  auth_oauth2.additional_scopes_key = extra_scope
+  auth_oauth2.verify_aud = false
   
   management.oauth_enabled = true
   management.oauth_client_id = rabbitmq-client
