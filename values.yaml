@@ -483,9 +483,7 @@ configuration: |-
   
   auth_oauth2.preferred_username_claims.1 = preferred_username
   auth_oauth2.preferred_username_claims.2 = client_id
- 
-  auth_oauth2.resource_server_type = rabbitmq
-  
+   
   auth_oauth2.default_key = keycloak
   auth_oauth2.oauth_providers.keycloak.https.cacertfile = /opt/bitnami/rabbitmq/certs/keycloak_ca.pem
 
