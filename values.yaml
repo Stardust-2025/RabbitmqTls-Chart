@@ -485,7 +485,7 @@ configuration: |-
   auth_oauth2.preferred_username_claims.2 = client_id
   
   auth_oauth2.default_key = keycloak
-  auth_oauth2.oauth_providers.keycloak.cacertfile = /opt/bitnami/rabbitmq/certs/keycloak_ca.pem
+  auth_oauth2.oauth_providers.keycloak.https.cacertfile = /opt/bitnami/rabbitmq/certs/keycloak_ca.pem
 
   
   management.oauth_enabled = true
