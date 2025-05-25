@@ -479,8 +479,10 @@ configuration: |-
   auth_oauth2.additional_scopes_key = extra_scope
   auth_oauth2.verify_aud = false
   auth_oauth2.https.verify = verify_none
-  auth_oauth2.oauth_providers.keycloak.username_claim = preferred_username
-  auth_oauth2.oauth_providers.keycloak.allowed_token_use = access_token
+  
+  auth_oauth2.preferred_username_claims.1 = preferred_username
+  auth_oauth2.preferred_username_claims.2 = email
+  
   auth_oauth2.default_key = keycloak
   auth_oauth2.https.cacertfile = /opt/bitnami/rabbitmq/certs/keycloak_ca.pem
 
