@@ -484,7 +484,6 @@ configuration: |-
   management.oauth_disable_basic_auth = false
   management.listener.port = 15671
   management.listener.ssl = true
-  management.oauth_userinfo_endpoint = https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/oauth2/userInfo
   management.oauth_scope = openid profile
 
 
