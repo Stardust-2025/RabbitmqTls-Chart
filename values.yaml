@@ -475,8 +475,7 @@ configuration: |-
 
   stream.listeners.ssl.1 = 30551
   stream.listeners.tcp = none
-  stream.advertised_host = 10.10.10.24
-  stream.advertised_port = 30551
+
 
   ## Management UI OAuth2 Login
   management.oauth_enabled = true
@@ -485,6 +484,7 @@ configuration: |-
   management.listener.port = 15671
   management.listener.ssl = true
   management.oauth_scope = openid profile
+  management.oauth_userinfo_endpoint = https://rmq-domain-47349c5d.auth.il-central-1.amazoncognito.com/oauth2/userInfo
 
 
   auth_backends.1 = oauth2
