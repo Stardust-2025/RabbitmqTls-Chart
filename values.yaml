@@ -259,7 +259,7 @@ memoryHighWatermark:
   value: 0.4
 ## @param plugins List of default plugins to enable (should only be altered to remove defaults; for additional plugins use `extraPlugins`)
 ##
-plugins: "rabbitmq_management rabbitmq_peer_discovery_k8s rabbitmq_stream rabbitmq_auth_mechanism_ssl rabbitmq_web_mqtt rabbitmq_auth_backend_oauth2"
+plugins: "rabbitmq_management rabbitmq_peer_discovery_k8s rabbitmq_stream"
 ## rabbitmq_stream
 
 ## @param queue_master_locator Changes the queue_master_locator setting in the rabbitmq config file
@@ -470,7 +470,6 @@ configuration: |-
   stream.listeners.tcp = none
 
   auth_backends.1 = oauth2
-  auth_backends.2 = internal
   
   auth_oauth2.resource_server_id = rabbitmq
 
