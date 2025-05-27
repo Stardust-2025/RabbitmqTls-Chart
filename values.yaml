@@ -469,8 +469,6 @@ configuration: |-
   auth_oauth2.preferred_username_claims.1 = username
 
   auth_oauth2.scope_to_rabbitmq_tag.tag:administrator = administrator
-  auth_oauth2.scope_to_rabbitmq_tag.tag:management = management
-  auth_oauth2.scope_to_rabbitmq_tag.tag:monitoring = monitoring
 
   management.oauth_enabled = true
   management.oauth_client_id = 3mnejjgha3q0l43lr906slt7i3
