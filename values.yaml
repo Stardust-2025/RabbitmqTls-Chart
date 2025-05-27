@@ -359,7 +359,7 @@ containerPorts:
   managerTls: 15671
   epmd: 4369
   metrics: 9419
-  stream: 30551
+  stream: 5551
 ## @param initScripts Dictionary of init scripts. Evaluated as a template.
 ## Specify dictionary of scripts to be run at first boot
 ## Alternatively, you can put your scripts under the files/docker-entrypoint-initdb.d directory
@@ -385,7 +385,7 @@ initScriptsSecret: ""
 ##
 extraContainerPorts: 
    - name: stream
-     containerPort: 30551
+     containerPort: 5551
    - name: amqp-tls
      containerPort: 5671
    - name: manager-tls
@@ -466,7 +466,7 @@ configuration: |-
   ssl_options.verify = verify_none
   listeners.ssl.default = 5671
   listeners.tcp = none
-  stream.listeners.ssl.1 = 30551
+  stream.listeners.ssl.1 = 5551
   stream.listeners.tcp = none
 
   auth_backends.1 = oauth2
@@ -1353,7 +1353,7 @@ networkPolicy:
   ##                   - frontend
   extraIngress: 
       - ports:
-        - port: 30551
+        - port: 5551
           protocol: TCP
   ## @param networkPolicy.extraEgress [array] Add extra ingress rules to the NetworkPolicy
   ## e.g:
