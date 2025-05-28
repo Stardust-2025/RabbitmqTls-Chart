@@ -352,7 +352,7 @@ extraEnvVarsSecret: ""
 ## @param containerPorts.metrics
 ##
 containerPorts:
-  amqp: 5672
+#  amqp: 5672
   amqpTls: 5671
   dist: 25672
   manager: 15672
@@ -545,10 +545,6 @@ extraConfiguration: |-
   disk_free_limit.absolute = 50MB
   vm_memory_high_watermark.absolute = 512MB
   consumer_timeout = 3600000
-  - name: amqps
-    containerPort: 5671
-    protocol: TCP
-
     
 ## @param extraConfigurationExistingSecret Existing secret with the extra configuration to append to `configuration`.
 ## Must contain the key "extraConfiguration"
@@ -1099,7 +1095,7 @@ service:
   ## @param service.ports.epmd EPMD Discovery service port
   ##
   ports:
-    amqp: 5672
+#    amqp: 5672
     amqpTls: 5671
     dist: 25673
     manager: 15672
@@ -1115,7 +1111,7 @@ service:
   ## @param service.portNames.epmd EPMD Discovery service port name
   ##
   portNames:
-    amqp: "amqp"
+#    amqp: "amqp"
     amqpTls: "amqp-tls"
     dist: "dist"
     manager: "http-stats"
@@ -1131,7 +1127,7 @@ service:
   ## @param service.nodePorts.metrics Node port for RabbitMQ Prometheues metrics
   ##
   nodePorts:
-    amqp: "30673"
+ #   amqp: "30673"
     amqpTls: "30670"
     dist: "30671"
     manager: "31677"
