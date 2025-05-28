@@ -352,7 +352,7 @@ extraEnvVarsSecret: ""
 ## @param containerPorts.metrics
 ##
 containerPorts:
-#  amqp: 5672
+  amqp: 5672
   amqpTls: 5671
   dist: 25672
   manager: 15672
@@ -1095,7 +1095,7 @@ service:
   ## @param service.ports.epmd EPMD Discovery service port
   ##
   ports:
-#    amqp: 5672
+    amqp: 5672
     amqpTls: 5671
     dist: 25673
     manager: 15672
@@ -1111,7 +1111,7 @@ service:
   ## @param service.portNames.epmd EPMD Discovery service port name
   ##
   portNames:
-#    amqp: "amqp"
+    amqp: "amqp"
     amqpTls: "amqp-tls"
     dist: "dist"
     manager: "http-stats"
@@ -1127,7 +1127,7 @@ service:
   ## @param service.nodePorts.metrics Node port for RabbitMQ Prometheues metrics
   ##
   nodePorts:
- #   amqp: "30673"
+    amqp: "30673"
     amqpTls: "30670"
     dist: "30671"
     manager: "31677"
