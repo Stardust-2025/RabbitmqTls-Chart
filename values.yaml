@@ -527,7 +527,7 @@ configuration: |-
 
   ## Console Logging
   log.console = true
-  log.console.level = info
+  log.console.level = debug
 
 
 ## @param configurationExistingSecret Existing secret with the configuration to use as rabbitmq.conf.
