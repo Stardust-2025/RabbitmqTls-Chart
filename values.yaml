@@ -545,6 +545,9 @@ extraConfiguration: |-
   disk_free_limit.absolute = 50MB
   vm_memory_high_watermark.absolute = 512MB
   consumer_timeout = 3600000
+  - name: amqps
+    containerPort: 5671
+    protocol: TCP
 
     
 ## @param extraConfigurationExistingSecret Existing secret with the extra configuration to append to `configuration`.
