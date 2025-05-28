@@ -481,8 +481,7 @@ configuration: |-
   auth_oauth2.oauth_providers.keycloak.jwks_uri = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2/protocol/openid-connect/certs
   auth_oauth2.oauth_providers.keycloak.https.verify = verify_none
   
-  auth_oauth2.preferred_username_claims.1 = preferred_username
-  auth_oauth2.preferred_username_claims.2 = client_id
+  auth_oauth2.preferred_username_claims.1 = user_name
 
   auth_oauth2.verify_aud = false
 
