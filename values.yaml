@@ -490,8 +490,8 @@ configuration: |-
   auth_oauth2.resource_server_type = rabbitmq
   
   management.oauth_enabled = true
-  management.oauth_client_id = rabbitmq-client
-  management.oauth_client_secret = tDLCpQbYdOqz2bmv9NYt1SrkK7F7oEG3
+  management.oauth_client_id = rabbitmq
+  management.oauth_client_secret = 0yngHaUvLdHNYfTM5Z3DYyRkgTf5wOxN
   management.oauth_scopes = openid profile rabbitmq.tag:administrator
   management.oauth_disable_basic_auth = true
   management.listener.ssl = true
