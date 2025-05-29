@@ -305,7 +305,7 @@ clustering:
 loadDefinition:
   ## @param loadDefinition.enabled Enable loading a RabbitMQ definitions file to configure RabbitMQ
   ##
-  enabled: false
+  enabled: true
   ## @param loadDefinition.file Name of the definitions file
   ##
   file: "/app/load_definition.json"
