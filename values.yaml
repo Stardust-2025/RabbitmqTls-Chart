@@ -469,7 +469,7 @@ configuration: |-
   stream.listeners.ssl.1 = 5551
   stream.listeners.tcp = none
 
-  auth_backends.1 = oauth2
+  auth_backends.1 = rabbitmq_auth_backend_oauth2
   
   auth_oauth2.resource_server_id = rabbitmq
 
