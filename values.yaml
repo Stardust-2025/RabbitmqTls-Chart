@@ -485,7 +485,6 @@ configuration: |-
   auth_oauth2.verify_aud = false
 
   auth_oauth2.additional_scopes_key = scope
-  auth_oauth2.role_to_tag.administrator = publisher
 
   #auth_oauth2.resource_server_type = rabbitmq
   
