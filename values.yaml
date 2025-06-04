@@ -469,10 +469,7 @@ configuration: |-
   stream.listeners.ssl.1 = 5551
   stream.listeners.tcp = none
 
-  auth_backends.1 = rabbitmq_auth_backend_oauth2
-  log.console = true
-  log.console.level = debug
-
+  auth_backends.1 = oauth2
   auth_oauth2.resource_server_id = rabbitmq
 
   auth_oauth2.issuer = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2
@@ -483,7 +480,7 @@ configuration: |-
   auth_oauth2.oauth_providers.keycloak.jwks_uri = https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2/protocol/openid-connect/certs
   auth_oauth2.oauth_providers.keycloak.https.verify = verify_none
   
-  auth_oauth2.preferred_username_claims.1 = preferred_username
+  auth_oauth2.preferred_username_claims.1 = user_name
 
   auth_oauth2.verify_aud = false
 
@@ -492,7 +489,7 @@ configuration: |-
   auth_oauth2.resource_server_type = rabbitmq
   
   management.oauth_enabled = true
-  #management.oauth_client_id = rabbitmq-client
+  management.oauth_client_id = rabbitmq-client
   management.oauth_client_secret = tDLCpQbYdOqz2bmv9NYt1SrkK7F7oEG3
   management.oauth_scopes = openid profile rabbitmq.tag:administrator
   management.oauth_disable_basic_auth = true
@@ -502,6 +499,8 @@ configuration: |-
   loopback_users = none
 
   
+  log.console.level = debug
+  log.console = true
 
   ## Prometheus metrics
   prometheus.tcp.port = {{ .Values.containerPorts.metrics }}
