@@ -486,12 +486,8 @@ configuration: |-
 
   auth_oauth2.additional_scopes_key = scope
 
-  # auth_oauth2.scope_aliases.1.alias = publisher
-  # auth_oauth2.scope_aliases.1.scope = rabbitmq.read:*/* rabbitmq.write:*/* rabbitmq.configure:*/*
-
   auth_oauth2.scope_aliases.2.alias = rabbitmq.tag:administrator
   auth_oauth2.scope_aliases.2.scope = rabbitmq.read:*/* rabbitmq.write:*/* rabbitmq.configure:*/*
-
 
   #auth_oauth2.resource_server_type = rabbitmq
   
