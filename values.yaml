@@ -470,6 +470,7 @@ configuration: |-
   stream.listeners.tcp = none
 
   auth_backends.1 = rabbitmq_auth_backend_oauth2
+  log.console = true
   log.console.level = debug
 
   auth_oauth2.resource_server_id = rabbitmq
