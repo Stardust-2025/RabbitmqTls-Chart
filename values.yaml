@@ -489,6 +489,9 @@ configuration: |-
   auth_oauth2.scope_aliases.2.alias = rabbitmq.tag:administrator
   auth_oauth2.scope_aliases.2.scope = rabbitmq.read:*/* rabbitmq.write:*/* rabbitmq.configure:*/* stream.read:* stream.write:* stream.configure:*
 
+  stream.advertised_host = a462f468f5a3b46648e4174273c54c54-232980629.il-central-1.elb.amazonaws.com 
+  stream.advertised_port = 30551
+
   #auth_oauth2.resource_server_type = rabbitmq
   
   management.oauth_enabled = true
