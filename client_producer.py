@@ -7,7 +7,7 @@ import json
 import ssl
 
 client_id = "rabbitmq"
-client_secret = "lxBLCs6z8nDsHwrnferx7uYXZ28wQo4w"
+client_secret = "ZRkOBbFqFIQL38Zkrhtf3hWqiWCweAod"
 
 print('Using client ID:', client_id, flush=True)
 

@@ -5,15 +5,10 @@ import json
 import re
 from rstream import Producer, AMQPMessage
 
-# import socket
-# sock = socket.create_connection(("a462f468f5a3b46648e4174273c54c54-232980629.il-central-1.elb.amazonaws.com", 30551), timeout=5)
-# print("✅ Port is open=================================================================", sock)
-# sock.close()
-
 async def fetch_access_token():
     url = "https://aa2e5455e8e9c4dfca016e71cedc50c5-789763159.il-central-1.elb.amazonaws.com/realms/rabbitmq2/protocol/openid-connect/token"
     client_id = "rabbitmq"
-    client_secret = "lxBLCs6z8nDsHwrnferx7uYXZ28wQo4w"
+    client_secret = "ZRkOBbFqFIQL38Zkrhtf3hWqiWCweAod"
 
     post_data = {
         "grant_type": "client_credentials",
@@ -44,13 +39,14 @@ async def publish():
     ssl_context.verify_mode = ssl.CERT_NONE
 
     async with Producer(
-        "a462f468f5a3b46648e4174273c54c54-232980629.il-central-1.elb.amazonaws.com",
-        port=30551,
+        host="a462f468f5a3b46648e4174273c54c54-232980629.il-central-1.elb.amazonaws.com",
+        port=5551,
         ssl_context=ssl_context,
         username="service-account-rabbitmq",
         password=token,
     ) as producer:
         stream_name = "oauth-rstream-o"
+
 
         # create a stream if it doesn't already exist
         await producer.create_stream(stream_name, exists_ok=True)
@@ -60,6 +56,6 @@ async def publish():
                 body=f"Hello {i}".encode()
             )
             await producer.send(stream=stream_name, message=amqp_message)
-            print(f"✅ Sent klklklkmessage {i}")
+            print(f"✅ Sent message {i}")
 
 asyncio.run(publish())
